@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "48010903870",
+    "project_id": "melsgarden-6454f",
+    "storage_bucket": "melsgarden-6454f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:48010903870:android:6ac290564911589c25ac6f",
+        "android_client_info": {
+          "package_name": "com.proyectoUfide.melsgarden"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "48010903870-hfqs9s5qtt7keloo83885opbl06pch6b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.proyectoUfide.melsgarden",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "48010903870-gbf0al95dc9scsl31se7vjjf45v7fc4i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJFsjPQfnLvxAB9R1TJqrhmMhaQsMVtN0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "48010903870-gbf0al95dc9scsl31se7vjjf45v7fc4i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "48010903870-lmedefnmlnl9s1u6j82tlsak98qbc8ad.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.proyectoUfide.melsgarden"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
