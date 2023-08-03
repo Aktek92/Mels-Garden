@@ -45,6 +45,8 @@ class _ListProducoWidgetState extends State<ListProducoWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return StreamBuilder<CategoriaRecord>(
       stream: CategoriaRecord.getDocument(widget.categoria!),
       builder: (context, snapshot) {
