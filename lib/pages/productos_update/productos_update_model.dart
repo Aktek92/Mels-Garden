@@ -1,10 +1,17 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:provider/provider.dart';
 
 class ProductosUpdateModel extends FlutterFlowModel {
@@ -23,10 +30,11 @@ class ProductosUpdateModel extends FlutterFlowModel {
   String? Function(BuildContext, String?)? txtNombreControllerValidator;
   // State field(s) for txtPrecio widget.
   TextEditingController? txtPrecioController;
+  final txtPrecioMask = MaskTextInputFormatter(mask: '####');
   String? Function(BuildContext, String?)? txtPrecioControllerValidator;
-  // State field(s) for txtCategoria widget.
-  TextEditingController? txtCategoriaController;
-  String? Function(BuildContext, String?)? txtCategoriaControllerValidator;
+  // State field(s) for drpCategorias widget.
+  int? drpCategoriasValue;
+  FormFieldController<int>? drpCategoriasValueController;
 
   /// Initialization and disposal methods.
 
@@ -37,7 +45,6 @@ class ProductosUpdateModel extends FlutterFlowModel {
     txtCodigoController?.dispose();
     txtNombreController?.dispose();
     txtPrecioController?.dispose();
-    txtCategoriaController?.dispose();
   }
 
   /// Action blocks are added here.

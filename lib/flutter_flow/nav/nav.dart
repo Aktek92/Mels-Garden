@@ -114,12 +114,20 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'productosUpdate',
           path: '/productosUpdate',
-          builder: (context, params) => ProductosUpdateWidget(),
+          builder: (context, params) => ProductosUpdateWidget(
+            categoria: params.getParam(
+                'categoria', ParamType.DocumentReference, false, ['categoria']),
+          ),
         ),
         FFRoute(
           name: 'LoginV2',
           path: '/loginV2',
           builder: (context, params) => LoginV2Widget(),
+        ),
+        FFRoute(
+          name: 'Contactos',
+          path: '/contactos',
+          builder: (context, params) => ContactosWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

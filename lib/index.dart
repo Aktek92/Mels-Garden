@@ -7,3 +7,4 @@ export '/pages/admin_productos/admin_productos_widget.dart'
 export '/pages/productos_update/productos_update_widget.dart'
     show ProductosUpdateWidget;
 export '/pages/login_v2/login_v2_widget.dart' show LoginV2Widget;
+export '/contactos/contactos_widget.dart' show ContactosWidget;

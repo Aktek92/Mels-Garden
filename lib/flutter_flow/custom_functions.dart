@@ -17,7 +17,7 @@ String? urlWhatsApp(
   String precio,
 ) {
   String link =
-      "https://wa.me/50685346460?text=Me%20gustaría%20saber%20más%20sobre%20" +
+      "https://wa.me/50661407837?text=Me%20gustaría%20saber%20más%20sobre%20" +
           nombre +
           "%20y%20su%20precio%20₡:%20" +
           precio;
