@@ -156,7 +156,7 @@ class _AdminHomeWidgetState extends State<AdminHomeWidget> {
                               return FFButtonWidget(
                                 onPressed: () async {
                                   context.pushNamed(
-                                    'productosUpdate',
+                                    'crearProducto',
                                     queryParameters: {
                                       'categoria': serializeParam(
                                         btnAdminCategoriaRecordList

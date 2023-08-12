@@ -112,9 +112,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => AdminProductosWidget(),
         ),
         FFRoute(
-          name: 'productosUpdate',
-          path: '/productosUpdate',
-          builder: (context, params) => ProductosUpdateWidget(
+          name: 'crearProducto',
+          path: '/crearProducto',
+          builder: (context, params) => CrearProductoWidget(
             categoria: params.getParam(
                 'categoria', ParamType.DocumentReference, false, ['categoria']),
           ),
@@ -128,6 +128,15 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'Contactos',
           path: '/contactos',
           builder: (context, params) => ContactosWidget(),
+        ),
+        FFRoute(
+          name: 'actualizarProducto',
+          path: '/actualizarProducto',
+          builder: (context, params) => ActualizarProductoWidget(
+            codigo: params.getParam('codigo', ParamType.String),
+            categoria: params.getParam(
+                'categoria', ParamType.DocumentReference, false, ['categoria']),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

@@ -166,11 +166,7 @@ class _AdminProductosWidgetState extends State<AdminProductosWidget> {
                                     children: [
                                       Expanded(
                                         child: Text(
-                                          valueOrDefault<String>(
-                                            listViewProductosRecord
-                                                .categoria?.id,
-                                            'nop cat',
-                                          ),
+                                          listViewProductosRecord.codigo,
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium,
                                         ),
@@ -207,11 +203,34 @@ class _AdminProductosWidgetState extends State<AdminProductosWidget> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.end,
                                         children: [
-                                          Icon(
-                                            Icons.edit_outlined,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
-                                            size: 24.0,
+                                          InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              context.pushNamed(
+                                                'actualizarProducto',
+                                                queryParameters: {
+                                                  'codigo': serializeParam(
+                                                    '',
+                                                    ParamType.String,
+                                                  ),
+                                                  'categoria': serializeParam(
+                                                    listViewProductosRecord
+                                                        .categoria,
+                                                    ParamType.DocumentReference,
+                                                  ),
+                                                }.withoutNulls,
+                                              );
+                                            },
+                                            child: Icon(
+                                              Icons.edit_outlined,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              size: 24.0,
+                                            ),
                                           ),
                                         ],
                                       ),

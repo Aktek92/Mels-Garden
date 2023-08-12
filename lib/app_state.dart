@@ -12,17 +12,25 @@ class FFAppState extends ChangeNotifier {
 
   FFAppState._internal();
 
-  Future initializePersistedState() async {}
+  Future initializePersistedState() async {
+    prefs = await SharedPreferences.getInstance();
+    _safeInit(() {
+      _imagentemporal = prefs.getString('ff_imagentemporal') ?? _imagentemporal;
+    });
+  }
 
   void update(VoidCallback callback) {
     callback();
     notifyListeners();
   }
 
-  String _imagetemporal = '';
-  String get imagetemporal => _imagetemporal;
-  set imagetemporal(String _value) {
-    _imagetemporal = _value;
+  late SharedPreferences prefs;
+
+  String _imagentemporal = '';
+  String get imagentemporal => _imagentemporal;
+  set imagentemporal(String _value) {
+    _imagentemporal = _value;
+    prefs.setString('ff_imagentemporal', _value);
   }
 }
 
