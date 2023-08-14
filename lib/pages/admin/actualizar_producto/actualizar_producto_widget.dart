@@ -508,6 +508,23 @@ class _ActualizarProductoWidgetState extends State<ActualizarProductoWidget> {
                         precio: int.tryParse(_model.txtPrecioController.text),
                         imagen: _model.uploadedFileUrl,
                       ));
+                      await showDialog(
+                        context: context,
+                        builder: (alertDialogContext) {
+                          return AlertDialog(
+                            title: Text('Imagenes'),
+                            content: Text(
+                                'Antes de confirmar debe de volver a cargar la imagen'),
+                            actions: [
+                              TextButton(
+                                onPressed: () =>
+                                    Navigator.pop(alertDialogContext),
+                                child: Text('Ok'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
                     },
                     text: 'Actualizar Producto',
                     options: FFButtonOptions(

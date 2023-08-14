@@ -171,24 +171,14 @@ class _LoginV2WidgetState extends State<LoginV2Widget>
                                               .emailAddressLoginController,
                                           obscureText: false,
                                           decoration: InputDecoration(
-                                            labelText: 'Email',
-                                            labelStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .override(
-                                                      fontFamily: 'Lexend Deca',
-                                                      color: Color(0xFF95A1AC),
-                                                      fontSize: 14.0,
-                                                      fontWeight:
-                                                          FontWeight.normal,
-                                                    ),
+                                            hintText: 'Correo',
                                             hintStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .bodyMedium
                                                     .override(
                                                       fontFamily: 'Lexend Deca',
                                                       color: Color(0xFF95A1AC),
-                                                      fontSize: 14.0,
+                                                      fontSize: 16.0,
                                                       fontWeight:
                                                           FontWeight.normal,
                                                     ),
@@ -252,24 +242,14 @@ class _LoginV2WidgetState extends State<LoginV2Widget>
                                           obscureText:
                                               !_model.passwordLoginVisibility,
                                           decoration: InputDecoration(
-                                            labelText: 'Contraseña',
-                                            labelStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .override(
-                                                      fontFamily: 'Lexend Deca',
-                                                      color: Color(0xFF95A1AC),
-                                                      fontSize: 14.0,
-                                                      fontWeight:
-                                                          FontWeight.normal,
-                                                    ),
+                                            hintText: 'Contraseña',
                                             hintStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .bodyMedium
                                                     .override(
                                                       fontFamily: 'Lexend Deca',
                                                       color: Color(0xFF95A1AC),
-                                                      fontSize: 14.0,
+                                                      fontSize: 16.0,
                                                       fontWeight:
                                                           FontWeight.normal,
                                                     ),
@@ -460,14 +440,7 @@ class _LoginV2WidgetState extends State<LoginV2Widget>
                                               _model.emailAddressController,
                                           obscureText: false,
                                           decoration: InputDecoration(
-                                            labelText: 'Email Address',
-                                            labelStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .override(
-                                                      fontFamily: 'Readex Pro',
-                                                      color: Color(0xFF95A1AC),
-                                                    ),
+                                            hintText: 'Correo',
                                             hintStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .bodyMedium
@@ -539,14 +512,7 @@ class _LoginV2WidgetState extends State<LoginV2Widget>
                                           obscureText:
                                               !_model.passwordVisibility,
                                           decoration: InputDecoration(
-                                            labelText: 'Password',
-                                            labelStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .override(
-                                                      fontFamily: 'Readex Pro',
-                                                      color: Color(0xFF95A1AC),
-                                                    ),
+                                            hintText: 'Contraseña',
                                             hintStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .bodyMedium
@@ -636,14 +602,7 @@ class _LoginV2WidgetState extends State<LoginV2Widget>
                                           obscureText:
                                               !_model.passwordConfirmVisibility,
                                           decoration: InputDecoration(
-                                            labelText: 'Confirm Password',
-                                            labelStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMedium
-                                                    .override(
-                                                      fontFamily: 'Readex Pro',
-                                                      color: Color(0xFF95A1AC),
-                                                    ),
+                                            hintText: 'Confirmar Contraseña',
                                             hintStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .bodyMedium

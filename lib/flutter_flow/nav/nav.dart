@@ -78,20 +78,22 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? HomeWidget() : LoginV2Widget(),
+          appStateNotifier.loggedIn ? NavBarPage() : LoginV2Widget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? HomeWidget() : LoginV2Widget(),
+              appStateNotifier.loggedIn ? NavBarPage() : LoginV2Widget(),
         ),
         FFRoute(
           name: 'Home',
           path: '/home',
-          builder: (context, params) => HomeWidget(
-            maceta: params.getParam('maceta', ParamType.int),
-          ),
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'Home')
+              : HomeWidget(
+                  maceta: params.getParam('maceta', ParamType.int),
+                ),
         ),
         FFRoute(
           name: 'ListProduco',
@@ -127,7 +129,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Contactos',
           path: '/contactos',
-          builder: (context, params) => ContactosWidget(),
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'Contactos')
+              : ContactosWidget(),
         ),
         FFRoute(
           name: 'actualizarProducto',
@@ -137,6 +141,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             categoria: params.getParam(
                 'categoria', ParamType.DocumentReference, false, ['categoria']),
           ),
+        ),
+        FFRoute(
+          name: 'HomePrueba',
+          path: '/homePrueba',
+          builder: (context, params) => HomePruebaWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
