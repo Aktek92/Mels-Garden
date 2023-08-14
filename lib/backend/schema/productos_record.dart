@@ -41,12 +41,24 @@ class ProductosRecord extends FirestoreRecord {
   DocumentReference? get categoria => _categoria;
   bool hasCategoria() => _categoria != null;
 
+  // "Temporada" field.
+  bool? _temporada;
+  bool get temporada => _temporada ?? false;
+  bool hasTemporada() => _temporada != null;
+
+  // "Disponibilidad" field.
+  bool? _disponibilidad;
+  bool get disponibilidad => _disponibilidad ?? false;
+  bool hasDisponibilidad() => _disponibilidad != null;
+
   void _initializeFields() {
     _codigo = snapshotData['Codigo'] as String?;
     _nombre = snapshotData['Nombre'] as String?;
     _precio = castToType<int>(snapshotData['Precio']);
     _imagen = snapshotData['imagen'] as String?;
     _categoria = snapshotData['Categoria'] as DocumentReference?;
+    _temporada = snapshotData['Temporada'] as bool?;
+    _disponibilidad = snapshotData['Disponibilidad'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -89,6 +101,8 @@ Map<String, dynamic> createProductosRecordData({
   int? precio,
   String? imagen,
   DocumentReference? categoria,
+  bool? temporada,
+  bool? disponibilidad,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -97,6 +111,8 @@ Map<String, dynamic> createProductosRecordData({
       'Precio': precio,
       'imagen': imagen,
       'Categoria': categoria,
+      'Temporada': temporada,
+      'Disponibilidad': disponibilidad,
     }.withoutNulls,
   );
 
@@ -112,12 +128,21 @@ class ProductosRecordDocumentEquality implements Equality<ProductosRecord> {
         e1?.nombre == e2?.nombre &&
         e1?.precio == e2?.precio &&
         e1?.imagen == e2?.imagen &&
-        e1?.categoria == e2?.categoria;
+        e1?.categoria == e2?.categoria &&
+        e1?.temporada == e2?.temporada &&
+        e1?.disponibilidad == e2?.disponibilidad;
   }
 
   @override
-  int hash(ProductosRecord? e) => const ListEquality()
-      .hash([e?.codigo, e?.nombre, e?.precio, e?.imagen, e?.categoria]);
+  int hash(ProductosRecord? e) => const ListEquality().hash([
+        e?.codigo,
+        e?.nombre,
+        e?.precio,
+        e?.imagen,
+        e?.categoria,
+        e?.temporada,
+        e?.disponibilidad
+      ]);
 
   @override
   bool isValidKey(Object? o) => o is ProductosRecord;

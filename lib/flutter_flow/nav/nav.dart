@@ -78,20 +78,22 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? HomeWidget() : LoginV2Widget(),
+          appStateNotifier.loggedIn ? NavBarPage() : LoginV2Widget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? HomeWidget() : LoginV2Widget(),
+              appStateNotifier.loggedIn ? NavBarPage() : LoginV2Widget(),
         ),
         FFRoute(
           name: 'Home',
           path: '/home',
-          builder: (context, params) => HomeWidget(
-            maceta: params.getParam('maceta', ParamType.int),
-          ),
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'Home')
+              : HomeWidget(
+                  maceta: params.getParam('maceta', ParamType.int),
+                ),
         ),
         FFRoute(
           name: 'ListProduco',
@@ -112,9 +114,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => AdminProductosWidget(),
         ),
         FFRoute(
-          name: 'productosUpdate',
-          path: '/productosUpdate',
-          builder: (context, params) => ProductosUpdateWidget(
+          name: 'crearProducto',
+          path: '/crearProducto',
+          builder: (context, params) => CrearProductoWidget(
             categoria: params.getParam(
                 'categoria', ParamType.DocumentReference, false, ['categoria']),
           ),
@@ -127,7 +129,23 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Contactos',
           path: '/contactos',
-          builder: (context, params) => ContactosWidget(),
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'Contactos')
+              : ContactosWidget(),
+        ),
+        FFRoute(
+          name: 'actualizarProducto',
+          path: '/actualizarProducto',
+          builder: (context, params) => ActualizarProductoWidget(
+            codigo: params.getParam('codigo', ParamType.String),
+            categoria: params.getParam(
+                'categoria', ParamType.DocumentReference, false, ['categoria']),
+          ),
+        ),
+        FFRoute(
+          name: 'HomePrueba',
+          path: '/homePrueba',
+          builder: (context, params) => HomePruebaWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
