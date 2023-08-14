@@ -718,7 +718,7 @@ class _LoginV2WidgetState extends State<LoginV2Widget>
                                             }
 
                                             context.goNamedAuth(
-                                                'Home', context.mounted);
+                                                'HomePrueba', context.mounted);
                                           },
                                           text: 'Registrarse',
                                           options: FFButtonOptions(

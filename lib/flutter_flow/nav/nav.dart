@@ -145,7 +145,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'HomePrueba',
           path: '/homePrueba',
-          builder: (context, params) => HomePruebaWidget(),
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'HomePrueba')
+              : HomePruebaWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

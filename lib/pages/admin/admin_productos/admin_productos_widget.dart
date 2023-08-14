@@ -110,6 +110,7 @@ class _AdminProductosWidgetState extends State<AdminProductosWidget> {
                       height: 100.0,
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
+                        shape: BoxShape.rectangle,
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
