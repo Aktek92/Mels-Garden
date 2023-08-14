@@ -2,6 +2,8 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/custom_code/widgets/index.dart' as custom_widgets;
+import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -77,9 +79,29 @@ class _HomePruebaWidgetState extends State<HomePruebaWidget> {
         ),
         body: SafeArea(
           top: true,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [],
+          child: Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(20.0, 15.0, 20.0, 60.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  width: 400.0,
+                  height: 790.0,
+                  child: custom_widgets.Carouselslider(
+                    width: 400.0,
+                    height: 790.0,
+                    images: List.generate(
+                        random_data.randomInteger(0, 0),
+                        (index) => random_data.randomImageUrl(
+                              0,
+                              0,
+                            )),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

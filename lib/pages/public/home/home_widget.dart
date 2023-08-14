@@ -52,6 +52,27 @@ class _HomeWidgetState extends State<HomeWidget> {
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primary,
           automaticallyImplyLeading: false,
+          leading: Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+            child: InkWell(
+              splashColor: Colors.transparent,
+              focusColor: Colors.transparent,
+              hoverColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onTap: () async {
+                GoRouter.of(context).prepareAuthEvent();
+                await authManager.signOut();
+                GoRouter.of(context).clearRedirectLocation();
+
+                context.goNamedAuth('LoginV2', context.mounted);
+              },
+              child: Icon(
+                Icons.logout,
+                color: FlutterFlowTheme.of(context).secondary,
+                size: 24.0,
+              ),
+            ),
+          ),
           title: Text(
             'Categorias',
             textAlign: TextAlign.start,
@@ -61,29 +82,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                   fontSize: 22.0,
                 ),
           ),
-          actions: [
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
-              child: InkWell(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () async {
-                  GoRouter.of(context).prepareAuthEvent();
-                  await authManager.signOut();
-                  GoRouter.of(context).clearRedirectLocation();
-
-                  context.goNamedAuth('LoginV2', context.mounted);
-                },
-                child: Icon(
-                  Icons.logout,
-                  color: FlutterFlowTheme.of(context).secondary,
-                  size: 24.0,
-                ),
-              ),
-            ),
-          ],
+          actions: [],
           centerTitle: true,
           elevation: 2.0,
         ),

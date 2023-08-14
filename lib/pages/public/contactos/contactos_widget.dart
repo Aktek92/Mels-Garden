@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -43,6 +44,40 @@ class _ContactosWidgetState extends State<ContactosWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Color(0xFFD3E1CC),
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).primary,
+          automaticallyImplyLeading: true,
+          leading: InkWell(
+            splashColor: Colors.transparent,
+            focusColor: Colors.transparent,
+            hoverColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onTap: () async {
+              GoRouter.of(context).prepareAuthEvent();
+              await authManager.signOut();
+              GoRouter.of(context).clearRedirectLocation();
+
+              context.goNamedAuth('LoginV2', context.mounted);
+            },
+            child: Icon(
+              Icons.exit_to_app,
+              color: Color(0xFFB84329),
+              size: 24.0,
+            ),
+          ),
+          title: Text(
+            'Redes Sociales y Más',
+            textAlign: TextAlign.center,
+            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                  fontFamily: 'Readex Pro',
+                  color: FlutterFlowTheme.of(context).primaryBackground,
+                  fontSize: 22.0,
+                ),
+          ),
+          actions: [],
+          centerTitle: true,
+          elevation: 4.0,
+        ),
         body: SafeArea(
           top: true,
           child: Column(
@@ -54,7 +89,7 @@ class _ContactosWidgetState extends State<ContactosWidget> {
                 alignment: AlignmentDirectional(0.0, 0.0),
                 child: Container(
                   width: MediaQuery.sizeOf(context).width * 0.8,
-                  height: MediaQuery.sizeOf(context).height * 0.8,
+                  height: MediaQuery.sizeOf(context).height * 0.6,
                   decoration: BoxDecoration(
                     color: Color(0xFF8B5A2B),
                     boxShadow: [

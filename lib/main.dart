@@ -114,7 +114,7 @@ class NavBarPage extends StatefulWidget {
 
 /// This is the private State class that goes with NavBarPage.
 class _NavBarPageState extends State<NavBarPage> {
-  String _currentPageName = 'Home';
+  String _currentPageName = 'HomePrueba';
   late Widget? _currentPage;
 
   @override
@@ -128,6 +128,7 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     final tabs = {
       'Home': HomeWidget(),
+      'HomePrueba': HomePruebaWidget(),
       'Contactos': ContactosWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
@@ -147,34 +148,59 @@ class _NavBarPageState extends State<NavBarPage> {
           _currentPage = null;
           _currentPageName = tabs.keys.toList()[i];
         }),
-        backgroundColor: Colors.white,
-        selectedItemColor: Color(0x00000000),
-        unselectedItemColor: Color(0x00000000),
-        selectedBackgroundColor: Color(0x00000000),
-        borderRadius: 8.0,
-        itemBorderRadius: 8.0,
-        margin: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+        backgroundColor: FlutterFlowTheme.of(context).tertiary,
+        selectedItemColor: Color(0xFF0D6A15),
+        unselectedItemColor: FlutterFlowTheme.of(context).primaryBackground,
+        selectedBackgroundColor: Color(0x4D70C333),
+        borderRadius: 100.0,
+        itemBorderRadius: 100.0,
+        margin: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
         padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
         width: double.infinity,
-        elevation: 0.0,
+        elevation: 5.0,
         items: [
           FloatingNavbarItem(
             customWidget: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.home_outlined,
-                  color:
-                      currentIndex == 0 ? Color(0x00000000) : Color(0x00000000),
+                  Icons.shopping_bag,
+                  color: currentIndex == 0
+                      ? Color(0xFF0D6A15)
+                      : FlutterFlowTheme.of(context).primaryBackground,
                   size: 24.0,
                 ),
                 Text(
-                  'Home',
+                  'Categorias',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: currentIndex == 0
-                        ? Color(0x00000000)
-                        : Color(0x00000000),
+                        ? Color(0xFF0D6A15)
+                        : FlutterFlowTheme.of(context).primaryBackground,
+                    fontSize: 11.0,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          FloatingNavbarItem(
+            customWidget: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.tips_and_updates,
+                  color: currentIndex == 1
+                      ? Color(0xFF0D6A15)
+                      : FlutterFlowTheme.of(context).primaryBackground,
+                  size: 24.0,
+                ),
+                Text(
+                  'Tips',
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: currentIndex == 1
+                        ? Color(0xFF0D6A15)
+                        : FlutterFlowTheme.of(context).primaryBackground,
                     fontSize: 11.0,
                   ),
                 ),
@@ -187,8 +213,19 @@ class _NavBarPageState extends State<NavBarPage> {
               children: [
                 Icon(
                   Icons.contact_support,
-                  color:
-                      currentIndex == 1 ? Color(0x00000000) : Color(0x00000000),
+                  color: currentIndex == 2
+                      ? Color(0xFF0D6A15)
+                      : FlutterFlowTheme.of(context).primaryBackground,
+                ),
+                Text(
+                  'Contacto',
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: currentIndex == 2
+                        ? Color(0xFF0D6A15)
+                        : FlutterFlowTheme.of(context).primaryBackground,
+                    fontSize: 11.0,
+                  ),
                 ),
               ],
             ),
