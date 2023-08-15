@@ -7,25 +7,25 @@ import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'home_prueba_model.dart';
-export 'home_prueba_model.dart';
+import 'tips_model.dart';
+export 'tips_model.dart';
 
-class HomePruebaWidget extends StatefulWidget {
-  const HomePruebaWidget({Key? key}) : super(key: key);
+class TipsWidget extends StatefulWidget {
+  const TipsWidget({Key? key}) : super(key: key);
 
   @override
-  _HomePruebaWidgetState createState() => _HomePruebaWidgetState();
+  _TipsWidgetState createState() => _TipsWidgetState();
 }
 
-class _HomePruebaWidgetState extends State<HomePruebaWidget> {
-  late HomePruebaModel _model;
+class _TipsWidgetState extends State<TipsWidget> {
+  late TipsModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => HomePruebaModel());
+    _model = createModel(context, () => TipsModel());
   }
 
   @override
@@ -37,8 +37,6 @@ class _HomePruebaWidgetState extends State<HomePruebaWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
@@ -53,8 +51,8 @@ class _HomePruebaWidgetState extends State<HomePruebaWidget> {
             borderWidth: 1.0,
             buttonSize: 60.0,
             icon: Icon(
-              Icons.exit_to_app,
-              color: Colors.white,
+              Icons.logout,
+              color: Color(0xFFB84329),
               size: 30.0,
             ),
             onPressed: () async {

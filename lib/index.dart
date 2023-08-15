@@ -1,5 +1,5 @@
 // Export pages
-export '/pages/public/home/home_widget.dart' show HomeWidget;
+export '/pages/public/categorias/categorias_widget.dart' show CategoriasWidget;
 export '/pages/public/list_produco/list_produco_widget.dart'
     show ListProducoWidget;
 export '/pages/admin/admin_home/admin_home_widget.dart' show AdminHomeWidget;
@@ -11,4 +11,5 @@ export '/pages/public/login_v2/login_v2_widget.dart' show LoginV2Widget;
 export '/pages/public/contactos/contactos_widget.dart' show ContactosWidget;
 export '/pages/admin/actualizar_producto/actualizar_producto_widget.dart'
     show ActualizarProductoWidget;
-export '/home_prueba/home_prueba_widget.dart' show HomePruebaWidget;
+export '/pages/public/tips/tips_widget.dart' show TipsWidget;
+export '/pages/public/carrito/carrito_widget.dart' show CarritoWidget;

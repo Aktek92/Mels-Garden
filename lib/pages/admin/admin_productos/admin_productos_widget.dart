@@ -35,8 +35,6 @@ class _AdminProductosWidgetState extends State<AdminProductosWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
@@ -52,7 +50,7 @@ class _AdminProductosWidgetState extends State<AdminProductosWidget> {
             buttonSize: 60.0,
             icon: Icon(
               Icons.arrow_back_rounded,
-              color: Colors.white,
+              color: Color(0xFFB84329),
               size: 30.0,
             ),
             onPressed: () async {

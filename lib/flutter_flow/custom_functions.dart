@@ -24,3 +24,13 @@ String? urlWhatsApp(
 
   return link;
 }
+
+double? sumarSubtotal(
+  double? valorSubtotal,
+  double? precio,
+) {
+  if (valorSubtotal == null || precio == null) {
+    return null;
+  }
+  return valorSubtotal + precio;
+}

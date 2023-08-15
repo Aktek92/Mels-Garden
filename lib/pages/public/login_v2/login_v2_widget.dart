@@ -48,8 +48,6 @@ class _LoginV2WidgetState extends State<LoginV2Widget>
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
@@ -350,7 +348,7 @@ class _LoginV2WidgetState extends State<LoginV2Widget>
                                                   'adminHome', context.mounted);
                                             } else {
                                               context.pushNamedAuth(
-                                                  'Home', context.mounted);
+                                                  'Tips', context.mounted);
                                             }
                                           },
                                           text: 'Login',
@@ -718,7 +716,7 @@ class _LoginV2WidgetState extends State<LoginV2Widget>
                                             }
 
                                             context.goNamedAuth(
-                                                'HomePrueba', context.mounted);
+                                                'Tips', context.mounted);
                                           },
                                           text: 'Registrarse',
                                           options: FFButtonOptions(

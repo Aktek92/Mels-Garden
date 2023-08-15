@@ -1,4 +1,3 @@
-import 'package:provider/provider.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -22,13 +21,7 @@ void main() async {
   usePathUrlStrategy();
   await initFirebase();
 
-  final appState = FFAppState(); // Initialize FFAppState
-  await appState.initializePersistedState();
-
-  runApp(ChangeNotifierProvider(
-    create: (context) => appState,
-    child: MyApp(),
-  ));
+  runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -114,7 +107,7 @@ class NavBarPage extends StatefulWidget {
 
 /// This is the private State class that goes with NavBarPage.
 class _NavBarPageState extends State<NavBarPage> {
-  String _currentPageName = 'HomePrueba';
+  String _currentPageName = 'Tips';
   late Widget? _currentPage;
 
   @override
@@ -127,8 +120,8 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
-      'Home': HomeWidget(),
-      'HomePrueba': HomePruebaWidget(),
+      'Tips': TipsWidget(),
+      'Categorias': CategoriasWidget(),
       'Contactos': ContactosWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
@@ -164,14 +157,14 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.shopping_bag,
+                  Icons.tips_and_updates,
                   color: currentIndex == 0
                       ? Color(0xFF0D6A15)
                       : FlutterFlowTheme.of(context).primaryBackground,
                   size: 24.0,
                 ),
                 Text(
-                  'Categorias',
+                  'Tips',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: currentIndex == 0
@@ -188,14 +181,14 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.tips_and_updates,
+                  Icons.shopping_bag,
                   color: currentIndex == 1
                       ? Color(0xFF0D6A15)
                       : FlutterFlowTheme.of(context).primaryBackground,
                   size: 24.0,
                 ),
                 Text(
-                  'Tips',
+                  'Categorías',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: currentIndex == 1

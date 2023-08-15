@@ -53,8 +53,6 @@ class _CrearProductoWidgetState extends State<CrearProductoWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return FutureBuilder<List<ProductosRecord>>(
       future: queryProductosRecordOnce(
         singleRecord: true,
@@ -112,7 +110,7 @@ class _CrearProductoWidgetState extends State<CrearProductoWidget> {
                 'Crear Producto',
                 style: FlutterFlowTheme.of(context).headlineMedium.override(
                       fontFamily: 'Outfit',
-                      color: Color(0xFF379110),
+                      color: FlutterFlowTheme.of(context).primaryBtnText,
                       fontSize: 22.0,
                     ),
               ),
