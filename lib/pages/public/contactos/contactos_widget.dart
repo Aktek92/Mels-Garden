@@ -37,8 +37,6 @@ class _ContactosWidgetState extends State<ContactosWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
@@ -60,7 +58,7 @@ class _ContactosWidgetState extends State<ContactosWidget> {
               context.goNamedAuth('LoginV2', context.mounted);
             },
             child: Icon(
-              Icons.exit_to_app,
+              Icons.logout,
               color: Color(0xFFB84329),
               size: 24.0,
             ),

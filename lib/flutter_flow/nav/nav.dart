@@ -87,11 +87,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               appStateNotifier.loggedIn ? NavBarPage() : LoginV2Widget(),
         ),
         FFRoute(
-          name: 'Home',
-          path: '/home',
+          name: 'Categorias',
+          path: '/categorias',
           builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'Home')
-              : HomeWidget(
+              ? NavBarPage(initialPage: 'Categorias')
+              : CategoriasWidget(
                   maceta: params.getParam('maceta', ParamType.int),
                 ),
         ),
@@ -131,7 +131,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/contactos',
           builder: (context, params) => params.isEmpty
               ? NavBarPage(initialPage: 'Contactos')
-              : ContactosWidget(),
+              : NavBarPage(
+                  initialPage: 'Contactos',
+                  page: ContactosWidget(),
+                ),
         ),
         FFRoute(
           name: 'actualizarProducto',
@@ -143,11 +146,15 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'HomePrueba',
-          path: '/homePrueba',
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'HomePrueba')
-              : HomePruebaWidget(),
+          name: 'Tips',
+          path: '/tips',
+          builder: (context, params) =>
+              params.isEmpty ? NavBarPage(initialPage: 'Tips') : TipsWidget(),
+        ),
+        FFRoute(
+          name: 'Carrito',
+          path: '/carrito',
+          builder: (context, params) => CarritoWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

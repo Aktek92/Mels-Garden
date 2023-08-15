@@ -1,9 +1,9 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -45,8 +45,6 @@ class _ListProducoWidgetState extends State<ListProducoWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return StreamBuilder<CategoriaRecord>(
       stream: CategoriaRecord.getDocument(widget.categoria!),
       builder: (context, snapshot) {
@@ -85,13 +83,14 @@ class _ListProducoWidgetState extends State<ListProducoWidget> {
                   context.safePop();
                 },
                 child: Icon(
-                  Icons.chevron_left,
-                  color: Colors.black,
+                  Icons.arrow_back_rounded,
+                  color: Color(0xFFB84329),
                   size: 30.0,
                 ),
               ),
               title: Text(
                 listProducoCategoriaRecord.categoria,
+                textAlign: TextAlign.center,
                 style: FlutterFlowTheme.of(context).displaySmall.override(
                       fontFamily: 'Outfit',
                       color: Color(0xFF0F1113),
@@ -112,13 +111,13 @@ class _ListProducoWidgetState extends State<ListProducoWidget> {
                       color: FlutterFlowTheme.of(context).secondary,
                       size: 24.0,
                     ),
-                    onPressed: () {
-                      print('IconButton pressed ...');
+                    onPressed: () async {
+                      context.pushNamed('Carrito');
                     },
                   ),
                 ),
               ],
-              centerTitle: false,
+              centerTitle: true,
               elevation: 0.0,
             ),
             body: SingleChildScrollView(
@@ -325,16 +324,67 @@ class _ListProducoWidgetState extends State<ListProducoWidget> {
                                               highlightColor:
                                                   Colors.transparent,
                                               onTap: () async {
-                                                await launchURL(
-                                                    functions.urlWhatsApp(
-                                                        listViewProductosRecord
-                                                            .nombre,
-                                                        listViewProductosRecord
-                                                            .precio
-                                                            .toString())!);
+                                                var subProductosRecordReference =
+                                                    SubProductosRecord
+                                                        .collection
+                                                        .doc();
+                                                await subProductosRecordReference
+                                                    .set(
+                                                        createSubProductosRecordData(
+                                                  producto:
+                                                      listViewProductosRecord
+                                                          .reference,
+                                                  cantidad: 1,
+                                                  subtotal:
+                                                      valueOrDefault<double>(
+                                                    listViewProductosRecord
+                                                        .precio
+                                                        .toDouble(),
+                                                    1.0,
+                                                  ),
+                                                ));
+                                                _model.subproductos = SubProductosRecord
+                                                    .getDocumentFromData(
+                                                        createSubProductosRecordData(
+                                                          producto:
+                                                              listViewProductosRecord
+                                                                  .reference,
+                                                          cantidad: 1,
+                                                          subtotal:
+                                                              valueOrDefault<
+                                                                  double>(
+                                                            listViewProductosRecord
+                                                                .precio
+                                                                .toDouble(),
+                                                            1.0,
+                                                          ),
+                                                        ),
+                                                        subProductosRecordReference);
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  SnackBar(
+                                                    content: Text(
+                                                      'Producto agregado!',
+                                                      style: TextStyle(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                      ),
+                                                    ),
+                                                    duration: Duration(
+                                                        milliseconds: 4000),
+                                                    backgroundColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .secondary,
+                                                  ),
+                                                );
+
+                                                setState(() {});
                                               },
                                               child: Icon(
-                                                Icons.chevron_right_rounded,
+                                                Icons.add_circle_sharp,
                                                 color: Color(0xFF57636C),
                                                 size: 24.0,
                                               ),

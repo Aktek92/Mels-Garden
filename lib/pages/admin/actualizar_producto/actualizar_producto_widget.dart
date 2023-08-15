@@ -51,8 +51,6 @@ class _ActualizarProductoWidgetState extends State<ActualizarProductoWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return StreamBuilder<List<ProductosRecord>>(
       stream: queryProductosRecord(
         singleRecord: true,
@@ -111,7 +109,7 @@ class _ActualizarProductoWidgetState extends State<ActualizarProductoWidget> {
                 'Actualizar  Producto',
                 style: FlutterFlowTheme.of(context).headlineMedium.override(
                       fontFamily: 'Outfit',
-                      color: Color(0xFF379110),
+                      color: FlutterFlowTheme.of(context).primaryBtnText,
                       fontSize: 22.0,
                     ),
               ),
