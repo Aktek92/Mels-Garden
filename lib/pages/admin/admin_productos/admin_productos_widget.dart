@@ -104,8 +104,8 @@ class _AdminProductosWidgetState extends State<AdminProductosWidget> {
                     padding:
                         EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
                     child: Container(
-                      width: 100.0,
-                      height: 100.0,
+                      width: MediaQuery.sizeOf(context).width * 1.0,
+                      height: MediaQuery.sizeOf(context).height * 0.15,
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
                         shape: BoxShape.rectangle,
@@ -114,8 +114,8 @@ class _AdminProductosWidgetState extends State<AdminProductosWidget> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Container(
-                            width: 100.0,
-                            height: 100.0,
+                            width: MediaQuery.sizeOf(context).width * 0.3,
+                            height: MediaQuery.sizeOf(context).height * 1.0,
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
@@ -134,73 +134,118 @@ class _AdminProductosWidgetState extends State<AdminProductosWidget> {
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                5.0, 5.0, 5.0, 5.0),
-                            child: Container(
-                              width: 230.0,
-                              height: 100.0,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                              ),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
-                                        child: Text(
-                                          listViewProductosRecord.nombre,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
-                                        child: Text(
-                                          listViewProductosRecord.codigo,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Align(
-                            alignment: AlignmentDirectional(0.0, 0.0),
+                          Expanded(
                             child: Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   5.0, 5.0, 5.0, 5.0),
                               child: Container(
-                                width: 58.0,
-                                height: 100.0,
+                                width: MediaQuery.sizeOf(context).width * 0.6,
+                                height: MediaQuery.sizeOf(context).height * 1.0,
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryBackground,
                                 ),
-                                alignment: AlignmentDirectional(0.0, 0.0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 0.0, 10.0),
-                                      child: Row(
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            listViewProductosRecord.nombre,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            listViewProductosRecord.codigo,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Align(
+                              alignment: AlignmentDirectional(0.0, 0.0),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    5.0, 5.0, 5.0, 5.0),
+                                child: Container(
+                                  width: MediaQuery.sizeOf(context).width * 0.1,
+                                  height:
+                                      MediaQuery.sizeOf(context).height * 1.0,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                  ),
+                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 10.0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                context.pushNamed(
+                                                  'actualizarProducto',
+                                                  queryParameters: {
+                                                    'codigo': serializeParam(
+                                                      '',
+                                                      ParamType.String,
+                                                    ),
+                                                    'categoria': serializeParam(
+                                                      listViewProductosRecord
+                                                          .categoria,
+                                                      ParamType
+                                                          .DocumentReference,
+                                                    ),
+                                                  }.withoutNulls,
+                                                );
+                                              },
+                                              child: Icon(
+                                                Icons.edit_outlined,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                                size: 24.0,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
-                                            MainAxisAlignment.end,
+                                            MainAxisAlignment.center,
                                         children: [
                                           InkWell(
                                             splashColor: Colors.transparent,
@@ -208,55 +253,20 @@ class _AdminProductosWidgetState extends State<AdminProductosWidget> {
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
-                                              context.pushNamed(
-                                                'actualizarProducto',
-                                                queryParameters: {
-                                                  'codigo': serializeParam(
-                                                    '',
-                                                    ParamType.String,
-                                                  ),
-                                                  'categoria': serializeParam(
-                                                    listViewProductosRecord
-                                                        .categoria,
-                                                    ParamType.DocumentReference,
-                                                  ),
-                                                }.withoutNulls,
-                                              );
+                                              await listViewProductosRecord
+                                                  .reference
+                                                  .delete();
                                             },
                                             child: Icon(
-                                              Icons.edit_outlined,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
+                                              Icons.delete_outline,
+                                              color: Color(0xFFAC1E27),
                                               size: 24.0,
                                             ),
                                           ),
                                         ],
                                       ),
-                                    ),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            await listViewProductosRecord
-                                                .reference
-                                                .delete();
-                                          },
-                                          child: Icon(
-                                            Icons.delete_outline,
-                                            color: Color(0xFFAC1E27),
-                                            size: 24.0,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),

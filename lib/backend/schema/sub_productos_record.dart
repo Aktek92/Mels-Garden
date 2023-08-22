@@ -31,10 +31,16 @@ class SubProductosRecord extends FirestoreRecord {
   double get subtotal => _subtotal ?? 0.0;
   bool hasSubtotal() => _subtotal != null;
 
+  // "Usuario" field.
+  DocumentReference? _usuario;
+  DocumentReference? get usuario => _usuario;
+  bool hasUsuario() => _usuario != null;
+
   void _initializeFields() {
     _producto = snapshotData['Producto'] as DocumentReference?;
     _cantidad = castToType<int>(snapshotData['Cantidad']);
     _subtotal = castToType<double>(snapshotData['Subtotal']);
+    _usuario = snapshotData['Usuario'] as DocumentReference?;
   }
 
   static CollectionReference get collection =>
@@ -75,12 +81,14 @@ Map<String, dynamic> createSubProductosRecordData({
   DocumentReference? producto,
   int? cantidad,
   double? subtotal,
+  DocumentReference? usuario,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'Producto': producto,
       'Cantidad': cantidad,
       'Subtotal': subtotal,
+      'Usuario': usuario,
     }.withoutNulls,
   );
 
@@ -95,12 +103,13 @@ class SubProductosRecordDocumentEquality
   bool equals(SubProductosRecord? e1, SubProductosRecord? e2) {
     return e1?.producto == e2?.producto &&
         e1?.cantidad == e2?.cantidad &&
-        e1?.subtotal == e2?.subtotal;
+        e1?.subtotal == e2?.subtotal &&
+        e1?.usuario == e2?.usuario;
   }
 
   @override
-  int hash(SubProductosRecord? e) =>
-      const ListEquality().hash([e?.producto, e?.cantidad, e?.subtotal]);
+  int hash(SubProductosRecord? e) => const ListEquality()
+      .hash([e?.producto, e?.cantidad, e?.subtotal, e?.usuario]);
 
   @override
   bool isValidKey(Object? o) => o is SubProductosRecord;

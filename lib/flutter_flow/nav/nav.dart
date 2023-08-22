@@ -91,9 +91,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/categorias',
           builder: (context, params) => params.isEmpty
               ? NavBarPage(initialPage: 'Categorias')
-              : CategoriasWidget(
-                  maceta: params.getParam('maceta', ParamType.int),
-                ),
+              : CategoriasWidget(),
         ),
         FFRoute(
           name: 'ListProduco',

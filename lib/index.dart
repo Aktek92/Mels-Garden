@@ -8,7 +8,7 @@ export '/pages/admin/admin_productos/admin_productos_widget.dart'
 export '/pages/admin/crear_producto/crear_producto_widget.dart'
     show CrearProductoWidget;
 export '/pages/public/login_v2/login_v2_widget.dart' show LoginV2Widget;
-export '/pages/public/contactos/contactos_widget.dart' show ContactosWidget;
+export '/pages/contactos/contactos_widget.dart' show ContactosWidget;
 export '/pages/admin/actualizar_producto/actualizar_producto_widget.dart'
     show ActualizarProductoWidget;
 export '/pages/tips/tips_widget.dart' show TipsWidget;

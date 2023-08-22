@@ -7,7 +7,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'carritos_pruebas2_model.dart';
@@ -42,6 +41,8 @@ class _CarritosPruebas2WidgetState extends State<CarritosPruebas2Widget> {
   Widget build(BuildContext context) {
     return StreamBuilder<List<SubProductosRecord>>(
       stream: querySubProductosRecord(
+        queryBuilder: (subProductosRecord) => subProductosRecord
+            .where('Usuario', isEqualTo: currentUserReference),
         singleRecord: true,
       ),
       builder: (context, snapshot) {
@@ -129,229 +130,165 @@ class _CarritosPruebas2WidgetState extends State<CarritosPruebas2Widget> {
                             style: FlutterFlowTheme.of(context).bodyMedium,
                           ),
                           Text(
-                            functions
-                                .calcularSubtotal(
-                                    carritosPruebas2SubProductosRecord!
-                                        .subtotal,
-                                    carritosPruebas2SubProductosRecord!
-                                        .cantidad)
-                                .toString(),
+                            'Hello World',
                             style: FlutterFlowTheme.of(context).bodyMedium,
                           ),
                         ],
                       ),
                     ],
                   ),
-                  if (carritosPruebas2SubProductosRecord?.cantidad == 0)
-                    Container(
-                      width: 500.0,
-                      height: 200.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: SvgPicture.asset(
-                          'assets/images/Shopping_cart_Monochromatic.svg',
-                          width: 500.0,
-                          height: 500.0,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  StreamBuilder<List<SubProductosRecord>>(
-                    stream: querySubProductosRecord(),
-                    builder: (context, snapshot) {
-                      // Customize what your widget looks like when it's loading.
-                      if (!snapshot.hasData) {
-                        return Center(
-                          child: SizedBox(
-                            width: 50.0,
-                            height: 50.0,
-                            child: CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                FlutterFlowTheme.of(context).primary,
+                  Expanded(
+                    child: StreamBuilder<List<SubProductosRecord>>(
+                      stream: querySubProductosRecord(),
+                      builder: (context, snapshot) {
+                        // Customize what your widget looks like when it's loading.
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: SizedBox(
+                              width: 50.0,
+                              height: 50.0,
+                              child: CircularProgressIndicator(
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  FlutterFlowTheme.of(context).primary,
+                                ),
                               ),
                             ),
-                          ),
-                        );
-                      }
-                      List<SubProductosRecord> listViewSubProductosRecordList =
-                          snapshot.data!;
-                      return ListView.builder(
-                        padding: EdgeInsets.zero,
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        itemCount: listViewSubProductosRecordList.length,
-                        itemBuilder: (context, listViewIndex) {
-                          final listViewSubProductosRecord =
-                              listViewSubProductosRecordList[listViewIndex];
-                          return StreamBuilder<ProductosRecord>(
-                            stream: ProductosRecord.getDocument(
-                                listViewSubProductosRecord.producto!),
-                            builder: (context, snapshot) {
-                              // Customize what your widget looks like when it's loading.
-                              if (!snapshot.hasData) {
-                                return Center(
-                                  child: SizedBox(
-                                    width: 50.0,
-                                    height: 50.0,
-                                    child: CircularProgressIndicator(
-                                      valueColor: AlwaysStoppedAnimation<Color>(
-                                        FlutterFlowTheme.of(context).primary,
+                          );
+                        }
+                        List<SubProductosRecord>
+                            listViewSubProductosRecordList = snapshot.data!;
+                        return ListView.builder(
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          itemCount: listViewSubProductosRecordList.length,
+                          itemBuilder: (context, listViewIndex) {
+                            final listViewSubProductosRecord =
+                                listViewSubProductosRecordList[listViewIndex];
+                            return StreamBuilder<ProductosRecord>(
+                              stream: ProductosRecord.getDocument(
+                                  listViewSubProductosRecord.producto!),
+                              builder: (context, snapshot) {
+                                // Customize what your widget looks like when it's loading.
+                                if (!snapshot.hasData) {
+                                  return Center(
+                                    child: SizedBox(
+                                      width: 50.0,
+                                      height: 50.0,
+                                      child: CircularProgressIndicator(
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                          FlutterFlowTheme.of(context).primary,
+                                        ),
                                       ),
                                     ),
+                                  );
+                                }
+                                final containerProductosRecord = snapshot.data!;
+                                return Container(
+                                  width: MediaQuery.sizeOf(context).width * 1.0,
+                                  height:
+                                      MediaQuery.sizeOf(context).height * 0.1,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    shape: BoxShape.rectangle,
                                   ),
-                                );
-                              }
-                              final containerProductosRecord = snapshot.data!;
-                              return Container(
-                                width: 100.0,
-                                height: 100.0,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          child: Image.network(
-                                            containerProductosRecord.imagen,
-                                            width: 100.0,
-                                            height: 100.0,
-                                            fit: BoxFit.cover,
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.network(
+                                              containerProductosRecord.imagen,
+                                              width: 100.0,
+                                              height: 100.0,
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Text(
-                                          containerProductosRecord.nombre,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
-                                        ),
-                                        Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Text(
-                                              'Precio: ',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
-                                            ),
-                                            Text(
-                                              '¢',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
-                                            ),
-                                            Text(
-                                              containerProductosRecord.precio
-                                                  .toString(),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
-                                            ),
-                                          ],
-                                        ),
-                                        Text(
-                                          '¢${functions.calcularSubtotal(containerProductosRecord.precio.toDouble(), listViewSubProductosRecord.cantidad).toString()}',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
-                                        ),
-                                      ],
-                                    ),
-                                    Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      10.0, 10.0, 0.0, 0.0),
-                                              child: InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  await listViewSubProductosRecord
-                                                      .reference
-                                                      .delete();
-                                                },
-                                                child: Icon(
-                                                  Icons.delete_forever_rounded,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                  size: 24.0,
-                                                ),
+                                        ],
+                                      ),
+                                      Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Text(
+                                            containerProductosRecord.nombre,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium,
+                                          ),
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Text(
+                                                'Precio: ',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium,
                                               ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 10.0, 0.0, 0.0),
-                                              child: InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  await listViewSubProductosRecord
-                                                      .reference
-                                                      .update({
-                                                    ...createSubProductosRecordData(
-                                                      subtotal: functions.sumarSubtotal(
-                                                          listViewSubProductosRecord
-                                                              .subtotal,
-                                                          containerProductosRecord
-                                                              .precio
-                                                              .toDouble()),
-                                                    ),
-                                                    'Cantidad':
-                                                        FieldValue.increment(1),
-                                                  });
-                                                },
-                                                child: Icon(
-                                                  Icons.add_circle,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                  size: 24.0,
-                                                ),
+                                              Text(
+                                                '¢',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium,
                                               ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      5.0, 10.0, 5.0, 0.0),
-                                              child: Text(
-                                                listViewSubProductosRecord
-                                                    .cantidad
+                                              Text(
+                                                containerProductosRecord.precio
                                                     .toString(),
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyMedium,
                                               ),
-                                            ),
-                                            if (carritosPruebas2SubProductosRecord
-                                                    ?.hasCantidad() ??
-                                                true)
+                                            ],
+                                          ),
+                                          Text(
+                                            '¢${functions.calcularSubtotal(containerProductosRecord.precio.toDouble(), listViewSubProductosRecord.cantidad).toString()}',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium,
+                                          ),
+                                        ],
+                                      ),
+                                      Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        10.0, 10.0, 0.0, 0.0),
+                                                child: InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    await listViewSubProductosRecord
+                                                        .reference
+                                                        .delete();
+                                                  },
+                                                  child: Icon(
+                                                    Icons
+                                                        .delete_forever_rounded,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryText,
+                                                    size: 24.0,
+                                                  ),
+                                                ),
+                                              ),
                                               Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
@@ -371,20 +308,20 @@ class _CarritosPruebas2WidgetState extends State<CarritosPruebas2Widget> {
                                                         .update({
                                                       ...createSubProductosRecordData(
                                                         subtotal: functions
-                                                            .restarSubtotal(
+                                                            .sumarSubtotal(
+                                                                listViewSubProductosRecord
+                                                                    .subtotal,
                                                                 containerProductosRecord
                                                                     .precio
-                                                                    .toDouble(),
-                                                                listViewSubProductosRecord
-                                                                    .subtotal),
+                                                                    .toDouble()),
                                                       ),
                                                       'Cantidad':
                                                           FieldValue.increment(
-                                                              -(-1)),
+                                                              1),
                                                     });
                                                   },
                                                   child: Icon(
-                                                    Icons.remove_circle_sharp,
+                                                    Icons.add_circle,
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .secondaryText,
@@ -392,18 +329,75 @@ class _CarritosPruebas2WidgetState extends State<CarritosPruebas2Widget> {
                                                   ),
                                                 ),
                                               ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
-                          );
-                        },
-                      );
-                    },
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        5.0, 10.0, 5.0, 0.0),
+                                                child: Text(
+                                                  listViewSubProductosRecord
+                                                      .cantidad
+                                                      .toString(),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium,
+                                                ),
+                                              ),
+                                              if (carritosPruebas2SubProductosRecord
+                                                      ?.hasCantidad() ??
+                                                  true)
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 10.0, 0.0, 0.0),
+                                                  child: InkWell(
+                                                    splashColor:
+                                                        Colors.transparent,
+                                                    focusColor:
+                                                        Colors.transparent,
+                                                    hoverColor:
+                                                        Colors.transparent,
+                                                    highlightColor:
+                                                        Colors.transparent,
+                                                    onTap: () async {
+                                                      await listViewSubProductosRecord
+                                                          .reference
+                                                          .update({
+                                                        ...createSubProductosRecordData(
+                                                          subtotal: functions
+                                                              .restarSubtotal(
+                                                                  containerProductosRecord
+                                                                      .precio
+                                                                      .toDouble(),
+                                                                  listViewSubProductosRecord
+                                                                      .subtotal),
+                                                        ),
+                                                        'Cantidad': FieldValue
+                                                            .increment(-(1)),
+                                                      });
+                                                    },
+                                                    child: Icon(
+                                                      Icons.remove_circle_sharp,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondaryText,
+                                                      size: 24.0,
+                                                    ),
+                                                  ),
+                                                ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        );
+                      },
+                    ),
                   ),
                   Row(
                     mainAxisSize: MainAxisSize.max,

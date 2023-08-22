@@ -67,7 +67,7 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Icon(
-                      Icons.chevron_left,
+                      Icons.arrow_back_rounded,
                       color: FlutterFlowTheme.of(context).primaryBtnText,
                       size: 45.0,
                     ),
