@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -38,9 +39,7 @@ class _AdminHomeWidgetState extends State<AdminHomeWidget> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<ProductosRecord>>(
-      stream: queryProductosRecord(
-        singleRecord: true,
-      ),
+      stream: queryProductosRecord(),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -60,13 +59,6 @@ class _AdminHomeWidgetState extends State<AdminHomeWidget> {
           );
         }
         List<ProductosRecord> adminHomeProductosRecordList = snapshot.data!;
-        // Return an empty Container when the item does not exist.
-        if (snapshot.data!.isEmpty) {
-          return Container();
-        }
-        final adminHomeProductosRecord = adminHomeProductosRecordList.isNotEmpty
-            ? adminHomeProductosRecordList.first
-            : null;
         return GestureDetector(
           onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
           child: Scaffold(
@@ -241,8 +233,10 @@ class _AdminHomeWidgetState extends State<AdminHomeWidget> {
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   10.0, 10.0, 10.0, 10.0),
                               child: FFButtonWidget(
-                                onPressed: () {
-                                  print('btnCSV pressed ...');
+                                onPressed: () async {
+                                  await actions.descargarCSV(
+                                    adminHomeProductosRecordList.toList(),
+                                  );
                                 },
                                 text: 'Descargar CSV',
                                 options: FFButtonOptions(

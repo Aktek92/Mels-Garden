@@ -152,9 +152,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               params.isEmpty ? NavBarPage(initialPage: 'Tips') : TipsWidget(),
         ),
         FFRoute(
-          name: 'Carrito',
-          path: '/carrito',
-          builder: (context, params) => CarritoWidget(),
+          name: 'ResetPassword',
+          path: '/resetPassword',
+          builder: (context, params) => ResetPasswordWidget(),
+        ),
+        FFRoute(
+          name: 'CarritoPruebas',
+          path: '/carritoPruebas',
+          builder: (context, params) => CarritoPruebasWidget(),
+        ),
+        FFRoute(
+          name: 'CarritosPruebas2',
+          path: '/carritosPruebas2',
+          builder: (context, params) => CarritosPruebas2Widget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

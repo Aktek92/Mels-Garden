@@ -112,7 +112,7 @@ class _ListProducoWidgetState extends State<ListProducoWidget> {
                       size: 24.0,
                     ),
                     onPressed: () async {
-                      context.pushNamed('Carrito');
+                      context.pushNamed('CarritosPruebas2');
                     },
                   ),
                 ),
@@ -336,12 +336,9 @@ class _ListProducoWidgetState extends State<ListProducoWidget> {
                                                           .reference,
                                                   cantidad: 1,
                                                   subtotal:
-                                                      valueOrDefault<double>(
-                                                    listViewProductosRecord
-                                                        .precio
-                                                        .toDouble(),
-                                                    1.0,
-                                                  ),
+                                                      listViewProductosRecord
+                                                          .precio
+                                                          .toDouble(),
                                                 ));
                                                 _model.subproductos = SubProductosRecord
                                                     .getDocumentFromData(
@@ -351,13 +348,9 @@ class _ListProducoWidgetState extends State<ListProducoWidget> {
                                                                   .reference,
                                                           cantidad: 1,
                                                           subtotal:
-                                                              valueOrDefault<
-                                                                  double>(
-                                                            listViewProductosRecord
-                                                                .precio
-                                                                .toDouble(),
-                                                            1.0,
-                                                          ),
+                                                              listViewProductosRecord
+                                                                  .precio
+                                                                  .toDouble(),
                                                         ),
                                                         subProductosRecordReference);
                                                 ScaffoldMessenger.of(context)

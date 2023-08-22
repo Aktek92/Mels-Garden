@@ -12,7 +12,7 @@ import '/backend/backend.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '/auth/firebase_auth/auth_util.dart';
 
-String? urlWhatsApp(
+String urlWhatsApp(
   String nombre,
   String precio,
 ) {
@@ -25,12 +25,40 @@ String? urlWhatsApp(
   return link;
 }
 
-double? sumarSubtotal(
-  double? valorSubtotal,
-  double? precio,
+double sumarSubtotal(
+  double valorSubtotal,
+  double precio,
 ) {
-  if (valorSubtotal == null || precio == null) {
-    return null;
+  valorSubtotal = valorSubtotal + precio;
+
+  return valorSubtotal;
+}
+
+double restarSubtotal(
+  double precio,
+  double valorSubtotal,
+) {
+  if (valorSubtotal > 0) {
+    valorSubtotal = valorSubtotal - precio;
   }
-  return valorSubtotal + precio;
+
+  return valorSubtotal;
+}
+
+double calcularSubtotal(
+  double precio,
+  int cantidad,
+) {
+  return precio * cantidad;
+}
+
+List<double> totalList(List<double> subtotal) {
+  // check for errors and give me posibble solutions
+  double total = 0;
+  List<double> totalList = [];
+  for (int i = 0; i < subtotal.length; i++) {
+    total += subtotal[i];
+    totalList.add(total);
+  }
+  return totalList;
 }

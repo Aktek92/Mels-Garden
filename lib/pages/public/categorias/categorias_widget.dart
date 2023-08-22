@@ -87,7 +87,7 @@ class _CategoriasWidgetState extends State<CategoriasWidget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(15.0, 15.0, 15.0, 15.0),
+            padding: EdgeInsetsDirectional.fromSTEB(15.0, 15.0, 15.0, 70.0),
             child: StreamBuilder<List<CategoriaRecord>>(
               stream: queryCategoriaRecord(),
               builder: (context, snapshot) {

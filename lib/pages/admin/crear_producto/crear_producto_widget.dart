@@ -482,6 +482,7 @@ class _CrearProductoWidgetState extends State<CrearProductoWidget> {
                                   16.0, 4.0, 16.0, 4.0),
                               hidesUnderline: true,
                               isSearchable: true,
+                              isMultiSelect: false,
                             );
                           },
                         ),

@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -64,7 +65,7 @@ class _TipsWidgetState extends State<TipsWidget> {
             },
           ),
           title: Text(
-            'Page Title',
+            'Tips',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Outfit',
                   color: Colors.white,
@@ -79,26 +80,49 @@ class _TipsWidgetState extends State<TipsWidget> {
           top: true,
           child: Padding(
             padding: EdgeInsetsDirectional.fromSTEB(20.0, 15.0, 20.0, 60.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Container(
-                  width: 400.0,
-                  height: 790.0,
-                  child: custom_widgets.Carouselslider(
-                    width: 400.0,
-                    height: 790.0,
-                    images: List.generate(
-                        random_data.randomInteger(0, 0),
-                        (index) => random_data.randomImageUrl(
-                              0,
-                              0,
-                            )),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  StreamBuilder<List<TipsRecord>>(
+                    stream: queryTipsRecord(),
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: SizedBox(
+                            width: 50.0,
+                            height: 50.0,
+                            child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                FlutterFlowTheme.of(context).primary,
+                              ),
+                            ),
+                          ),
+                        );
+                      }
+                      List<TipsRecord> carouselsliderTipsRecordList =
+                          snapshot.data!;
+                      return Container(
+                        width: 400.0,
+                        height: 700.0,
+                        child: custom_widgets.Carouselslider(
+                          width: 400.0,
+                          height: 700.0,
+                          images: List.generate(
+                              random_data.randomInteger(1, 5),
+                              (index) => random_data.randomImageUrl(
+                                    100,
+                                    100,
+                                  )),
+                        ),
+                      );
+                    },
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
