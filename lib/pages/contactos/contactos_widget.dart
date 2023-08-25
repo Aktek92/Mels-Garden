@@ -86,10 +86,16 @@ class _ContactosWidgetState extends State<ContactosWidget> {
               Align(
                 alignment: AlignmentDirectional(0.0, 0.0),
                 child: Container(
-                  width: MediaQuery.sizeOf(context).width * 0.8,
-                  height: MediaQuery.sizeOf(context).height * 0.6,
+                  width: MediaQuery.sizeOf(context).width * 0.9,
+                  height: MediaQuery.sizeOf(context).height * 0.75,
                   decoration: BoxDecoration(
                     color: Color(0xFF8B5A2B),
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: Image.asset(
+                        'assets/images/FondoContacto.jpg',
+                      ).image,
+                    ),
                     boxShadow: [
                       BoxShadow(
                         blurRadius: 20.0,
@@ -97,12 +103,13 @@ class _ContactosWidgetState extends State<ContactosWidget> {
                         offset: Offset(0.0, 2.0),
                       )
                     ],
+                    shape: BoxShape.rectangle,
                   ),
                   child: Align(
                     alignment: AlignmentDirectional(0.0, 0.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         FFButtonWidget(
@@ -214,7 +221,9 @@ class _ContactosWidgetState extends State<ContactosWidget> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                         ),
-                      ],
+                      ]
+                          .divide(SizedBox(height: 50.0))
+                          .around(SizedBox(height: 50.0)),
                     ),
                   ),
                 ),

@@ -492,6 +492,7 @@ class _ActualizarProductoWidgetState extends State<ActualizarProductoWidget> {
                                   16.0, 4.0, 16.0, 4.0),
                               hidesUnderline: true,
                               isSearchable: true,
+                              isMultiSelect: false,
                             );
                           },
                         ),

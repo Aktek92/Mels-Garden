@@ -386,9 +386,8 @@ class _LoginV2WidgetState extends State<LoginV2Widget>
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 20.0, 0.0, 0.0),
                                         child: FFButtonWidget(
-                                          onPressed: () {
-                                            print(
-                                                'Button-ForgotPassword pressed ...');
+                                          onPressed: () async {
+                                            context.pushNamed('ResetPassword');
                                           },
                                           text: 'Forgot Password?',
                                           options: FFButtonOptions(

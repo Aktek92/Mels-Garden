@@ -10,13 +10,7 @@ import 'categorias_model.dart';
 export 'categorias_model.dart';
 
 class CategoriasWidget extends StatefulWidget {
-  const CategoriasWidget({
-    Key? key,
-    int? maceta,
-  })  : this.maceta = maceta ?? 5,
-        super(key: key);
-
-  final int maceta;
+  const CategoriasWidget({Key? key}) : super(key: key);
 
   @override
   _CategoriasWidgetState createState() => _CategoriasWidgetState();
@@ -87,7 +81,7 @@ class _CategoriasWidgetState extends State<CategoriasWidget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(15.0, 15.0, 15.0, 15.0),
+            padding: EdgeInsetsDirectional.fromSTEB(15.0, 15.0, 15.0, 70.0),
             child: StreamBuilder<List<CategoriaRecord>>(
               stream: queryCategoriaRecord(),
               builder: (context, snapshot) {
@@ -107,86 +101,73 @@ class _CategoriasWidgetState extends State<CategoriasWidget> {
                 }
                 List<CategoriaRecord> staggeredViewCategoriaRecordList =
                     snapshot.data!;
-                return InkWell(
-                  splashColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  hoverColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onTap: () async {
-                    context.pushNamed(
-                      'Categorias',
-                      queryParameters: {
-                        'maceta': serializeParam(
-                          0,
-                          ParamType.int,
-                        ),
-                      }.withoutNulls,
-                      extra: <String, dynamic>{
-                        kTransitionInfoKey: TransitionInfo(
-                          hasTransition: true,
-                          transitionType: PageTransitionType.fade,
-                          duration: Duration(milliseconds: 0),
-                        ),
+                return MasonryGridView.count(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 10.0,
+                  mainAxisSpacing: 10.0,
+                  itemCount: staggeredViewCategoriaRecordList.length,
+                  itemBuilder: (context, staggeredViewIndex) {
+                    final staggeredViewCategoriaRecord =
+                        staggeredViewCategoriaRecordList[staggeredViewIndex];
+                    return InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        context.pushNamed(
+                          'ListProduco',
+                          queryParameters: {
+                            'categoria': serializeParam(
+                              staggeredViewCategoriaRecord.reference,
+                              ParamType.DocumentReference,
+                            ),
+                          }.withoutNulls,
+                        );
                       },
+                      child: Container(
+                        width: MediaQuery.sizeOf(context).width * 0.5,
+                        height: MediaQuery.sizeOf(context).height * 0.35,
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image.network(
+                                staggeredViewCategoriaRecord.imagen,
+                                width: MediaQuery.sizeOf(context).width * 0.5,
+                                height: MediaQuery.sizeOf(context).height * 0.2,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Expanded(
+                              child: ListTile(
+                                title: Text(
+                                  staggeredViewCategoriaRecord.categoria,
+                                  style:
+                                      FlutterFlowTheme.of(context).titleLarge,
+                                ),
+                                trailing: Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  size: 20.0,
+                                ),
+                                tileColor: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                dense: false,
+                              ),
+                            ),
+                          ].divide(SizedBox(height: 10.0)),
+                        ),
+                      ),
                     );
                   },
-                  child: MasonryGridView.count(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 10.0,
-                    mainAxisSpacing: 10.0,
-                    itemCount: staggeredViewCategoriaRecordList.length,
-                    itemBuilder: (context, staggeredViewIndex) {
-                      final staggeredViewCategoriaRecord =
-                          staggeredViewCategoriaRecordList[staggeredViewIndex];
-                      return Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
-                            child: Image.network(
-                              staggeredViewCategoriaRecord.imagen,
-                              width: MediaQuery.sizeOf(context).width * 0.5,
-                              height: MediaQuery.sizeOf(context).height * 0.2,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              context.pushNamed(
-                                'ListProduco',
-                                queryParameters: {
-                                  'categoria': serializeParam(
-                                    staggeredViewCategoriaRecord.reference,
-                                    ParamType.DocumentReference,
-                                  ),
-                                }.withoutNulls,
-                              );
-                            },
-                            child: ListTile(
-                              title: Text(
-                                staggeredViewCategoriaRecord.categoria,
-                                style: FlutterFlowTheme.of(context).titleLarge,
-                              ),
-                              trailing: Icon(
-                                Icons.arrow_forward_ios,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                size: 20.0,
-                              ),
-                              tileColor: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              dense: false,
-                            ),
-                          ),
-                        ].divide(SizedBox(height: 10.0)),
-                      );
-                    },
-                  ),
                 );
               },
             ),

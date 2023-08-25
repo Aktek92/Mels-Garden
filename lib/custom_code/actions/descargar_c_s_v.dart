@@ -20,7 +20,7 @@ Future descargarCSV(List<ProductosRecord>? documento) async {
   String companyAddress = "Canoas, Alajuela, Costa Rica.";
   String header = "$companyName,$companyAddress\n\n";
 
-  String fileContent = header + "Código, Nombre, Precio, Categoría";
+  String fileContent = header + "Código, Nombre, Precio";
 
   documento.asMap().forEach((index, record) => fileContent = fileContent +
       "\n" +
@@ -28,11 +28,9 @@ Future descargarCSV(List<ProductosRecord>? documento) async {
       "," +
       record.nombre.toString() +
       "," +
-      record.precio.toString() +
-      "," +
-      record.categoria.toString());
+      record.precio.toString());
 
-  final fileName = "ControlInventario" + DateTime.now().toString() + ".csv";
+  final fileName = "ControldeInventario" + DateTime.now().toString() + ".csv";
 
   // Encode the string as a List<int> of UTF-8 bytes
   var bytes = utf8.encode(fileContent);
