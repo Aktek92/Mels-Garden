@@ -78,28 +78,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? NavBarPage() : LoginV2Widget(),
+          appStateNotifier.loggedIn ? NavBarPage() : LoginWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? NavBarPage() : LoginV2Widget(),
-        ),
-        FFRoute(
-          name: 'Categorias',
-          path: '/categorias',
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'Categorias')
-              : CategoriasWidget(),
-        ),
-        FFRoute(
-          name: 'ListProduco',
-          path: '/listProduco',
-          builder: (context, params) => ListProducoWidget(
-            categoria: params.getParam(
-                'categoria', ParamType.DocumentReference, false, ['categoria']),
-          ),
+              appStateNotifier.loggedIn ? NavBarPage() : LoginWidget(),
         ),
         FFRoute(
           name: 'adminHome',
@@ -120,9 +105,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'LoginV2',
-          path: '/loginV2',
-          builder: (context, params) => LoginV2Widget(),
+          name: 'Login',
+          path: '/login',
+          builder: (context, params) => LoginWidget(),
         ),
         FFRoute(
           name: 'Contactos',
@@ -155,14 +140,42 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ResetPasswordWidget(),
         ),
         FFRoute(
-          name: 'CarritoPruebas',
-          path: '/carritoPruebas',
-          builder: (context, params) => CarritoPruebasWidget(),
+          name: 'ListProducto',
+          path: '/listProducto',
+          builder: (context, params) => ListProductoWidget(
+            categoria: params.getParam(
+                'categoria', ParamType.DocumentReference, false, ['categoria']),
+          ),
         ),
         FFRoute(
-          name: 'CarritosPruebas2',
-          path: '/carritosPruebas2',
-          builder: (context, params) => CarritosPruebas2Widget(),
+          name: 'DetalleProducto',
+          path: '/detalleProducto',
+          builder: (context, params) => DetalleProductoWidget(
+            productoRef: params.getParam('productoRef',
+                ParamType.DocumentReference, false, ['productos']),
+            usuarioRef: params.getParam(
+                'usuarioRef', ParamType.DocumentReference, false, ['users']),
+          ),
+        ),
+        FFRoute(
+          name: 'Categorias',
+          path: '/categorias',
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'Categorias')
+              : CategoriasWidget(),
+        ),
+        FFRoute(
+          name: 'Carritos',
+          path: '/carritos',
+          builder: (context, params) => CarritosWidget(),
+        ),
+        FFRoute(
+          name: 'ListaPedidos',
+          path: '/listaPedidos',
+          builder: (context, params) => ListaPedidosWidget(
+            productos: params.getParam<DocumentReference>(
+                'productos', ParamType.DocumentReference, true, ['productos']),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -329,7 +342,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.location);
-            return '/loginV2';
+            return '/login';
           }
           return null;
         },

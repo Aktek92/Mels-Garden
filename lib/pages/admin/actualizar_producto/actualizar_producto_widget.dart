@@ -51,8 +51,12 @@ class _ActualizarProductoWidgetState extends State<ActualizarProductoWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return StreamBuilder<List<ProductosRecord>>(
       stream: queryProductosRecord(
+        queryBuilder: (productosRecord) =>
+            productosRecord.where('Codigo', isEqualTo: widget.codigo),
         singleRecord: true,
       ),
       builder: (context, snapshot) {

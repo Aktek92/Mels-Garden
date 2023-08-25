@@ -15,12 +15,15 @@ import '/auth/firebase_auth/auth_util.dart';
 String urlWhatsApp(
   String nombre,
   String precio,
+  String cant,
 ) {
   String link =
       "https://wa.me/50661407837?text=Me%20gustaría%20saber%20más%20sobre%20" +
           nombre +
           "%20y%20su%20precio%20₡:%20" +
-          precio;
+          precio +
+          "%20y%20su%20cantidad%20" +
+          cant;
 
   return link;
 }
@@ -49,10 +52,10 @@ double calcularSubtotal(
   double precio,
   int cantidad,
 ) {
-  return precio * cantidad;
+  return (precio * cantidad);
 }
 
-List<double> totalList(List<double> subtotal) {
+double totalList(List<double> subtotal) {
   // check for errors and give me posibble solutions
   double total = 0;
   List<double> totalList = [];
@@ -60,5 +63,9 @@ List<double> totalList(List<double> subtotal) {
     total += subtotal[i];
     totalList.add(total);
   }
-  return totalList;
+  return total;
+}
+
+double restarPrecioLista(double precio) {
+  return precio * -1;
 }

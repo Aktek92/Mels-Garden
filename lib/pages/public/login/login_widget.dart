@@ -6,26 +6,26 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'login_v2_model.dart';
-export 'login_v2_model.dart';
+import 'login_model.dart';
+export 'login_model.dart';
 
-class LoginV2Widget extends StatefulWidget {
-  const LoginV2Widget({Key? key}) : super(key: key);
+class LoginWidget extends StatefulWidget {
+  const LoginWidget({Key? key}) : super(key: key);
 
   @override
-  _LoginV2WidgetState createState() => _LoginV2WidgetState();
+  _LoginWidgetState createState() => _LoginWidgetState();
 }
 
-class _LoginV2WidgetState extends State<LoginV2Widget>
+class _LoginWidgetState extends State<LoginWidget>
     with TickerProviderStateMixin {
-  late LoginV2Model _model;
+  late LoginModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => LoginV2Model());
+    _model = createModel(context, () => LoginModel());
 
     _model.tabBarController = TabController(
       vsync: this,
@@ -48,6 +48,8 @@ class _LoginV2WidgetState extends State<LoginV2Widget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
@@ -138,12 +140,12 @@ class _LoginV2WidgetState extends State<LoginV2Widget>
                                 5.0, 5.0, 5.0, 5.0),
                             tabs: [
                               Tab(
-                                text: 'Sign In',
+                                text: 'Inicio de sesión',
                                 iconMargin: EdgeInsetsDirectional.fromSTEB(
                                     5.0, 5.0, 5.0, 5.0),
                               ),
                               Tab(
-                                text: 'Sign Up',
+                                text: 'Crear cuenta',
                               ),
                             ],
                             controller: _model.tabBarController,
@@ -351,7 +353,7 @@ class _LoginV2WidgetState extends State<LoginV2Widget>
                                                   'Tips', context.mounted);
                                             }
                                           },
-                                          text: 'Login',
+                                          text: 'Ingresar',
                                           options: FFButtonOptions(
                                             width: 230.0,
                                             height: 50.0,
@@ -389,7 +391,7 @@ class _LoginV2WidgetState extends State<LoginV2Widget>
                                           onPressed: () async {
                                             context.pushNamed('ResetPassword');
                                           },
-                                          text: 'Forgot Password?',
+                                          text: '¿Olvidaste tu contraseña?',
                                           options: FFButtonOptions(
                                             width: 170.0,
                                             height: 40.0,

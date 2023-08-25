@@ -35,6 +35,8 @@ class _AdminProductosWidgetState extends State<AdminProductosWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
@@ -219,7 +221,8 @@ class _AdminProductosWidgetState extends State<AdminProductosWidget> {
                                                   'actualizarProducto',
                                                   queryParameters: {
                                                     'codigo': serializeParam(
-                                                      '',
+                                                      listViewProductosRecord
+                                                          .codigo,
                                                       ParamType.String,
                                                     ),
                                                     'categoria': serializeParam(

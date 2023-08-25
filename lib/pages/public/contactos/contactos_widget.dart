@@ -37,6 +37,8 @@ class _ContactosWidgetState extends State<ContactosWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
@@ -55,7 +57,7 @@ class _ContactosWidgetState extends State<ContactosWidget> {
               await authManager.signOut();
               GoRouter.of(context).clearRedirectLocation();
 
-              context.goNamedAuth('LoginV2', context.mounted);
+              context.goNamedAuth('Login', context.mounted);
             },
             child: Icon(
               Icons.logout,
@@ -68,7 +70,7 @@ class _ContactosWidgetState extends State<ContactosWidget> {
             textAlign: TextAlign.center,
             style: FlutterFlowTheme.of(context).bodyMedium.override(
                   fontFamily: 'Readex Pro',
-                  color: FlutterFlowTheme.of(context).primaryBackground,
+                  color: Colors.white,
                   fontSize: 22.0,
                 ),
           ),

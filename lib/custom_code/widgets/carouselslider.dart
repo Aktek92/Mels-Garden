@@ -40,10 +40,8 @@ class _CarouselsliderState extends State<Carouselslider> {
                 width: MediaQuery.of(context).size.width,
                 margin: EdgeInsets.symmetric(horizontal: 5.0),
                 decoration: BoxDecoration(color: Colors.amber),
-                child: Text(
-                  'text $i',
-                  style: TextStyle(fontSize: 16.0),
-                ));
+                child: Image.network(
+                    'https://www.petlife.mx/u/fotografias/m/2023/5/16/f768x1-2048_2175_5050.jpg'));
           },
         );
       }).toList(),

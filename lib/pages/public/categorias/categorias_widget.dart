@@ -36,6 +36,8 @@ class _CategoriasWidgetState extends State<CategoriasWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
@@ -56,7 +58,7 @@ class _CategoriasWidgetState extends State<CategoriasWidget> {
                 await authManager.signOut();
                 GoRouter.of(context).clearRedirectLocation();
 
-                context.goNamedAuth('LoginV2', context.mounted);
+                context.goNamedAuth('Login', context.mounted);
               },
               child: Icon(
                 Icons.logout,
@@ -116,7 +118,7 @@ class _CategoriasWidgetState extends State<CategoriasWidget> {
                       highlightColor: Colors.transparent,
                       onTap: () async {
                         context.pushNamed(
-                          'ListProduco',
+                          'ListProducto',
                           queryParameters: {
                             'categoria': serializeParam(
                               staggeredViewCategoriaRecord.reference,
@@ -134,35 +136,30 @@ class _CategoriasWidgetState extends State<CategoriasWidget> {
                         ),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             ClipRRect(
                               borderRadius: BorderRadius.circular(8.0),
                               child: Image.network(
-                                staggeredViewCategoriaRecord.imagen,
+                                valueOrDefault<String>(
+                                  staggeredViewCategoriaRecord.imagen,
+                                  'https://media.evolufarma.es/no-disponible.jpg',
+                                ),
                                 width: MediaQuery.sizeOf(context).width * 0.5,
                                 height: MediaQuery.sizeOf(context).height * 0.2,
                                 fit: BoxFit.cover,
                               ),
                             ),
-                            Expanded(
-                              child: ListTile(
-                                title: Text(
-                                  staggeredViewCategoriaRecord.categoria,
-                                  style:
-                                      FlutterFlowTheme.of(context).titleLarge,
-                                ),
-                                trailing: Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  size: 20.0,
-                                ),
-                                tileColor: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                dense: false,
-                              ),
-                            ),
+                            SelectionArea(
+                                child: Text(
+                              staggeredViewCategoriaRecord.categoria,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    fontSize: 22.0,
+                                  ),
+                            )),
                           ].divide(SizedBox(height: 10.0)),
                         ),
                       ),

@@ -38,6 +38,8 @@ class _AdminHomeWidgetState extends State<AdminHomeWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return StreamBuilder<List<ProductosRecord>>(
       stream: queryProductosRecord(),
       builder: (context, snapshot) {
@@ -82,7 +84,7 @@ class _AdminHomeWidgetState extends State<AdminHomeWidget> {
                   await authManager.signOut();
                   GoRouter.of(context).clearRedirectLocation();
 
-                  context.goNamedAuth('LoginV2', context.mounted);
+                  context.goNamedAuth('Login', context.mounted);
                 },
               ),
               title: Text(
@@ -215,6 +217,59 @@ class _AdminHomeWidgetState extends State<AdminHomeWidget> {
                                     ),
                                   );
                                 },
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  10.0, 10.0, 10.0, 10.0),
+                              child: FFButtonWidget(
+                                onPressed: () async {
+                                  context.pushNamed(
+                                    'ListaPedidos',
+                                    queryParameters: {
+                                      'productos': serializeParam(
+                                        adminHomeProductosRecordList
+                                            .map((e) => e.reference)
+                                            .toList(),
+                                        ParamType.DocumentReference,
+                                        true,
+                                      ),
+                                    }.withoutNulls,
+                                  );
+                                },
+                                text: 'Ver Pedidos',
+                                options: FFButtonOptions(
+                                  height: 40.0,
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      24.0, 0.0, 24.0, 0.0),
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  color: FlutterFlowTheme.of(context).secondary,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        color: Colors.white,
+                                      ),
+                                  elevation: 3.0,
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
                               ),
                             ),
                           ),
